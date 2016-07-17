@@ -12,10 +12,10 @@ function randomInt(min, max) {
 }
 
 function makeNumPoints() {
-  const x = randomInt(25, 80);
+  const x = randomInt(25, 35);
   const values =  [
     x,
-    x + randomInt(1, 10),
+    x + randomInt(4, 10),
   ];
   window.location.hash = values.join(":");
   return values;
