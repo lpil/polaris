@@ -1,16 +1,25 @@
 const interval = 15;
 const sideLength = Math.min(window.innerWidth, window.innerHeight);
-const pointsA = 34;
-const pointsB = 90;
-const angleIncA = Math.PI * 2 / pointsA;
-const angleIncB = Math.PI * 2 / pointsB;
-const iterations = lowest_common_multiple(pointsA, pointsB);
 const radius = sideLength * 0.5 - 10;
 const SVG = document.querySelector('.js-svg g');
 const CENTER = Object.freeze(point(
   window.innerWidth / 2,
   window.innerHeight / 2
 ));
+
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function makeNumPoints() {
+  const x = randomInt(25, 80);
+  const values =  [
+    x,
+    x + randomInt(1, 10),
+  ];
+  window.location.hash = values.join(":");
+  return values;
+}
 
 function lowest_common_multiple(x, y) {
   return Math.abs((x * y) / greatest_common_denominator(x, y));
@@ -75,6 +84,11 @@ function plotStraightLine({ a, b }) {
   SVG.appendChild(line);
   return line;
 }
+
+const [pointsA, pointsB] = makeNumPoints();
+const angleIncA = Math.PI * 2 / pointsA;
+const angleIncB = Math.PI * 2 / pointsB;
+const iterations = lowest_common_multiple(pointsA, pointsB);
 
 function iterate(i, angleA, angleB) {
   if (i < 1) { return; }
