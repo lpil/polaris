@@ -1,11 +1,11 @@
 const interval = 15;
-const smallestSideLength = Math.min(window.innerWidth, window.innerHeight);
+const sideLength = Math.min(window.innerWidth, window.innerHeight);
 const pointsA = 34;
 const pointsB = 90;
 const angleIncA = Math.PI * 2 / pointsA;
 const angleIncB = Math.PI * 2 / pointsB;
 const iterations = lowest_common_multiple(pointsA, pointsB);
-const radius = smallestSideLength * 0.47;
+const radius = sideLength * 0.5 - 10;
 const SVG = document.querySelector('.js-svg g');
 const CENTER = Object.freeze(point(
   window.innerWidth / 2,
@@ -77,12 +77,11 @@ function plotStraightLine({ a, b }) {
 }
 
 function iterate(i, angleA, angleB) {
-  console.log(i);
   if (i < 1) { return; }
   const a = circlePoint(radius, angleA);
   const b = circlePoint(radius, angleB);
   const line = center(straightLine(a, b));
-  const elem = plotStraightLine(line)
+  plotStraightLine(line)
   const next = function() {
     iterate(i - 1, angleA + angleIncA, angleB + angleIncB)
   };
